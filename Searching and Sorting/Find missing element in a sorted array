@@ -1,0 +1,21 @@
+int search(int arr[], int start, int end)
+{
+  if(start > end)
+    return -1;
+  while((end - start) > 1)
+  {
+    int mid = start + (end - start) / 2;
+    if(arr[start] - start != (arr[mid] - mid))
+      end = mid;
+    else if(arr[end] - end != (arr[mid] - mid))
+      start = mid;
+  }
+  return (arr[start] + 1); 
+}
+
+int main()
+{
+    int ar[] = { 1, 2, 3, 4, 5, 6, 8 };
+    int start = 0, end = sizeof(arr) - 1;
+    cout << search(ar, start, end);
+}
