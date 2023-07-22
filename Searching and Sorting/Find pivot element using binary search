@@ -1,0 +1,17 @@
+int pivotIndex(vector<int> arr)
+{
+  int start = 0, end = arr.size() - 1;
+  while(start <= end)
+  {
+    int mid = start + (end - start) / 2;
+    if(mid + 1 < arr.size() && arr[mid] > arr[mid + 1])
+      retunn arr[mid];
+    if(arr[mid - 1] >= 0 && arr[mid] > arr[mid - 1])
+      return arr[mid - 1];
+    if(arr[start] >= arr[mid])
+      start = mid + 1;
+    else
+      end = mid - 1;
+  }
+  return -1;
+}
