@@ -1,0 +1,48 @@
+int binarySearch(vector<int> arr, int target, int start, int end)
+    {
+        while(start <= end)
+        {
+            int mid = start + (end - start) / 2;
+            if(arr[mid] == target)
+                return mid;
+            if(arr[mid] > target)
+                end = mid - 1;
+            else
+                start = mid + 1;
+        }
+        return -1;
+    }
+
+    int pivot(vector<int> arr)
+    {
+        int start = 0, end = arr.size() - 1;
+        while(start < end)
+        {
+            int mid = start + (end - start) / 2;
+            if(mid - 1 >= 0 && arr[mid] < arr[mid - 1])
+                return mid - 1;
+            if(mid + 1 < arr.size() && arr[mid] > arr[mid + 1])
+                return mid;
+            if(arr[start] >= arr[mid])
+                end = mid - 1;
+            else
+                start = mid;
+        }
+        return start;
+    }
+    int search(vector<int>& nums, int target) 
+    {
+        int pivotIndex = pivot(nums);
+        if(target >= nums[0] && target <= nums[pivotIndex])
+        {
+            int ans = binarySearch(nums, target, 0, pivotIndex);
+            return ans;
+        }
+        if(pivotIndex + 1 < nums.size() && target >= nums[pivotIndex + 1] && target <= nums[nums.size() - 1])
+        {
+            int ans = binarySearch(nums, target, pivotIndex + 1, nums.size() - 1);
+            return ans;
+        }
+        else
+            return -1;
+    }
