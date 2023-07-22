@@ -24,7 +24,7 @@ int occurence(vector<long long> v, long long x, bool occ)
 }
 
 pair<long,long> indexes(vector<long long> v, long long x)
-    {
+{
         pair<long, long> p = make_pair(-1, -1);
         
         int ans1 = occurence(v, x, 1);        // 1 is used for first occurrence 
@@ -32,4 +32,6 @@ pair<long,long> indexes(vector<long long> v, long long x)
         p.first = ans1;
         p.second = ans2;
         return p;
-    }
+}
+
+// TC - O(logn)
