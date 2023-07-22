@@ -1,3 +1,5 @@
+//USING CODE
+
 int occurence(vector<long long> v, long long x, bool occ)
 {
         int start = 0;
@@ -35,3 +37,10 @@ pair<long,long> indexes(vector<long long> v, long long x)
 }
 
 // TC - O(logn)
+
+//USING PREDEFIND FUNCTION
+//for first
+auto ans1 = lower_bound(v.begin(), v.end(), target);
+cout<<ans1-v.begin();
+auto ans2 = upper_bound(v.begin(), v.end(), target);
+cout<<ans2-v.begin();
