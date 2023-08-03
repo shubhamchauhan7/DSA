@@ -1,0 +1,15 @@
+void printMiddle(stack<int> &st, int totalSize)
+{
+  if(st.empty())
+    return;
+  if(st.size() == (totalSize / 2) + 1)
+  {
+    cout << st.top();
+    return;
+  }  
+
+  int temp = st.top();
+  st.pop();
+  printMiddle(st, totalSize);
+  st.push(temp);
+}
