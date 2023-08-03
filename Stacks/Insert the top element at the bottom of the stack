@@ -1,0 +1,22 @@
+void insertBottom(stack<int> st, int target)
+{
+  if(st.empty())
+  {
+    st.push(target);
+    return;
+  }
+
+  int temp = st.top();
+  st.pop();
+  insertBottom(st, target);
+  return;
+}
+
+void solve(stack<int> st)
+{
+  if(st.empty())
+    return;
+  int temp = st.top();
+  st.pop();
+  insertBottom(st, temp);
+}
