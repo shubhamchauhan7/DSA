@@ -1,0 +1,21 @@
+void subsequence(string &str, int &n, int i, string ans)
+{
+  if(i == n)
+  {
+    cout << ans << endl;
+    return;
+  }
+
+  subsequence(str, n, i + 1, ans + str[i]);
+  subsequence(str, n, i + 1, ans);
+  return;
+}
+
+int main()
+{
+  string str = "abc";
+  string ans = "";
+  int n = str.length();
+  int i = 0;
+  subsequence(str, n, i, ans);
+}
