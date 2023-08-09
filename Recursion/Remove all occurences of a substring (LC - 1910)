@@ -1,0 +1,17 @@
+void solve(string &s, string &part)
+    {
+        int found = s.find(part);
+        if(found != string::npos)
+        {
+            s.erase(found, part.length());
+            solve(s, part);
+        }
+        else
+            return;
+    }
+
+    string removeOccurrences(string s, string part)
+    {
+        solve(s, part);
+        return s;
+    }
