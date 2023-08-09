@@ -1,0 +1,38 @@
+// From right to left
+int solve(string &s, char &p, int index)
+    {
+        if(index == -1)
+            return -1;
+            
+        if(s[index] == p)
+            return index;
+            
+        return solve(s, p, --index);
+    }
+    
+    int LastIndex(string s, char p)
+    {
+    
+        int index = s.length() - 1;
+        return solve(s, p, index);
+    }
+
+// From left to right
+int solve(string &s, char &p, int index, int lastIndex)
+    {
+        if(index == s.length())
+            return lastIndex;
+            
+        if(s[index] == p)
+            lastIndex = index;
+            
+        return solve(s, p, ++index, lastIndex);
+    }
+    
+    int LastIndex(string s, char p)
+    {
+    
+        int index = 0;
+        int lastIndex = -1;
+        return solve(s, p, index, lastIndex);
+    }
