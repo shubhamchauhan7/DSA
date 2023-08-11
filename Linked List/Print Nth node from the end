@@ -1,0 +1,62 @@
+//Using RECURSION
+Node* solve(Node* head, int &n)
+    {
+        if(head == NULL)
+            return NULL;
+        Node* ans = solve(head->next, n);
+        
+        n--;
+        if(n == 0)
+            return head;
+        else
+			return ans;
+    }
+
+Node* nthNodeFromEnd(Node* head, int n)
+{
+	if(head == NULL)
+        return NULL;
+        
+    Node* ans = solve(head, n);
+    return ans;
+}
+
+
+
+//Using ITERATIVE METHOD
+int solve(Node  *head)
+    {
+        int count = 0;
+        Node *temp = head;
+        
+        while(temp != NULL)
+        {
+            count++;
+            temp = temp->next;
+        }
+        
+        return count;
+    }
+
+    int getNthFromLast(Node *head, int n)
+    {
+        if(head == NULL)
+            return -1;
+        int length = solve(head);
+        
+        if(n > length)
+            return -1;
+        
+        length = length - n;
+        
+        int index = 0;
+        Node *temp = head;
+        
+        while(index != length)
+        {
+            index++;
+            temp = temp->next;
+        }
+            
+        return temp->data;
+    }
