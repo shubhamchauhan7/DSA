@@ -1,0 +1,22 @@
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
+    {
+        if(headA == NULL || headB == NULL)
+            return NULL;
+
+        ListNode* car1 = headA;
+        ListNode* car2 = headB;
+
+        while(car1 != car2)
+        {
+            if(car1 == NULL)
+                car1 = headB;
+            else
+                car1 = car1->next;
+            
+            if(car2 == NULL)
+                car2 = headA;
+            else
+                car2 = car2->next;
+        }    
+        return car1;
+    }
