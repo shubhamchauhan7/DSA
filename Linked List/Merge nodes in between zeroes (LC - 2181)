@@ -1,0 +1,70 @@
+// NOT DELETING THE EXTRA NODES
+ListNode* mergeNodes(ListNode* head) 
+    {
+        ListNode* curr = head;
+        ListNode* forward = head->next;
+
+        while(forward != NULL)
+        {
+            curr = forward;
+            forward = forward->next;
+            while(forward->val != 0)
+            {
+                curr->val = curr->val + forward->val;
+                forward = forward->next;
+            }
+            curr->next = forward;
+            forward = forward->next;
+        }    
+
+        ListNode* slow = head->next;
+        ListNode* fast = slow->next;
+        while(fast != NULL)
+        {
+            if(fast->val == 0)
+                fast = fast->next;
+            else
+            {
+                slow->next = fast;
+                slow = fast;
+                fast = fast->next;
+            }
+        }
+        slow->next = fast;
+        return head->next;
+    }
+
+// DELETING THE EXTRA NODES
+
+ListNode* mergeNodes(ListNode* head)
+    {
+        ListNode* prev = head;
+        ListNode* curr = head;
+        ListNode* forward = head->next;
+        int sum = 0;
+
+        while(forward != NULL)
+        {
+            if(forward->val != 0)
+                sum = sum + forward->val;
+            else
+            {
+                curr->val = sum;
+                sum = 0;
+                prev = curr;
+                curr = curr->next;
+            }
+            forward = forward->next;
+        }
+        prev->next = NULL;
+
+        // if we want to delete the nodes to save memory, it will take more time otherwise code will run fast.
+        while(curr != NULL)
+        {
+            ListNode* temp = curr;
+            curr = curr->next;
+            temp->next = NULL;
+            delete temp;
+        }
+        return head;
+    }
