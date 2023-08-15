@@ -1,0 +1,27 @@
+//Using Hashset
+
+int findDuplicate(vector<int>& nums) 
+    {
+        unordered_set<int> seen;
+        for(int i = 0; i < nums.size(); i++)
+        {
+            if(seen.find(nums[i]) != seen.end())
+                return nums[i];
+            else
+                seen.insert(nums[i]);
+        }    
+        return -1;
+    }
+
+// Using loop
+int findDuplicate(vector<int>& nums) 
+    {
+        for(int i = 0; i < nums.size(); i++)
+        {
+            int index = abs(nums[i]);
+            if(nums[index] < 0)
+                return index;
+            nums[index] = nums[index] * -1;
+        }
+        return -1;
+    }
