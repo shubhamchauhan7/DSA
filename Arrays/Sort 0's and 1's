@@ -28,33 +28,22 @@ void sortZeroesAndOne(int input[], int size)
     int end = size - 1;
     int i = 0;
     
-    while(start < end)
+    while(i < end)
     {
         if(input[i] == 0)
         {
-            if(input[start] == 1)
-            {
-                swap(input[i], input[start]);
-                start++;
-            }
-            else
-            {
-                start++;
-                i++;
-            }
+            int temp = input[start];
+            input[start] = input[i];
+            input[i] = temp;
+            start++;
+            i++;
         }
         else
         {
-            if(input[end] == 0)
-            {
-                swap(input[i], input[end]);
-                end--;
-            }
-            else
-            {
-                end--;
-                i++;
-            }
+            int temp = input[end];
+            input[end] = input[i];
+            input[i] = temp;
+            end--;
         }
     }
 }
