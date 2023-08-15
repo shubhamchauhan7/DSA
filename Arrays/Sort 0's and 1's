@@ -1,0 +1,60 @@
+// 1 Approach (BETTER)
+
+void sortZeroesAndOne(int input[], int size)
+{
+    int prev = 0;
+    int curr = size - 1;
+
+    while(prev < curr)
+    {
+        if(input[prev] == 1 && input[curr] == 0)
+        {
+            int temp = input[prev];
+            input[prev] = input[curr];
+            input[curr] = temp;
+        }
+        if(input[prev] == 0)
+            prev++;
+        if(input[curr] == 1)
+            curr--;
+    }
+}
+
+// 2 Approach
+
+void sortZeroesAndOne(int input[], int size)
+{
+    int start = 0; 
+    int end = size - 1;
+    int i = 0;
+    
+    while(start < end)
+    {
+        if(input[i] == 0)
+        {
+            if(input[start] == 1)
+            {
+                swap(input[i], input[start]);
+                start++;
+            }
+            else
+            {
+                start++;
+                i++;
+            }
+        }
+        else
+        {
+            if(input[end] == 0)
+            {
+                swap(input[i], input[end]);
+                end--;
+            }
+            else
+            {
+                end--;
+                i++;
+            }
+        }
+    }
+}
