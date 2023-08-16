@@ -1,0 +1,122 @@
+// Using BOTTOM-UP APPROACH
+int bottomUp(vector<int> &coins, int amount)
+    {
+        vector<int> dp(amount + 1, INT_MAX);
+        dp[0] = 0;
+
+        for(int target = 1; target <= amount; target++)
+        {
+            int mini = INT_MAX;
+            for(int i = 0; i < coins.size(); i++)
+            {
+                if(target - coins[i] >= 0)
+                {
+                    int ans = dp[target - coins[i]];
+                    if(ans != INT_MAX)
+                        mini = min(mini , 1 + ans);
+                }
+            }
+            dp[target] = mini;
+        }
+        return dp[amount];
+    }
+
+    int coinChange(vector<int>& coins, int amount) 
+    {
+        int ans = bottomUp(coins, amount);
+        if(ans != INT_MAX)
+            return ans;
+        else
+            return -1;
+    }
+
+
+// Using TOP-DOWN APPROACH
+int topDown(vector<int> &coins, int amount, vector<int> &dp)
+    {
+        if(amount == 0)
+            return 0;
+        if(amount < 0)
+            return INT_MAX;
+
+        if(dp[amount] != -1)
+            return dp[amount];
+        int mini = INT_MAX;
+        for(int i = 0; i < coins.size(); i++)
+        {
+            int ans = topDown(coins, amount - coins[i], dp);
+            if(ans != INT_MAX)
+                mini = min(mini , 1 + ans);
+        }
+        dp[amount] = mini;
+        return mini;
+    }
+
+    int coinChange(vector<int>& coins, int amount) 
+    {
+        vector<int> dp(amount + 1, -1);
+        int ans = topDown(coins, amount, dp);
+        
+        if(ans != INT_MAX)
+            return ans;
+        else
+            return -1;
+    }
+
+
+// Using RECURSION (1st way)
+int solve(vector<int> &coins, int amount)
+    {
+        if(amount == 0)
+            return 0;
+        if(amount < 0)
+            return INT_MAX;
+
+        int mini = INT_MAX;
+        for(int i = 0; i < coins.size(); i++)
+        {
+            int ans = solve(coins, amount - coins[i]);
+            if(ans != INT_MAX)
+                mini = min(mini , 1 + ans);
+        }
+        return mini;
+    }
+
+    int coinChange(vector<int>& coins, int amount) 
+    {
+        int ans = solve(coins, amount);
+        
+        if(ans != INT_MAX)
+            return ans;
+        else
+            return -1;
+    }
+
+
+// Using RECURSION (2nd way)
+void solve(vector<int> &coins, int target, int count, int &mini)
+    {
+        if(target < 0)
+            return;
+        if(target == 0)
+        {
+            mini = min(mini, count);
+            return;
+        }
+
+        for(int i = 0; i < coins.size(); i++)
+            solve(coins, target - coins[i], count + 1, mini);
+        return;
+    }
+
+    int coinChange(vector<int>& coins, int amount) 
+    {
+        int count = 0;
+        int mini = INT_MAX;
+        solve(coins, amount, count, mini);
+        
+        if(mini != INT_MAX)
+            return mini;
+        else
+            return -1;
+    }
