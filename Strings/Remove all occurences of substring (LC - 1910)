@@ -1,0 +1,33 @@
+//Using LOOP (More efficient)
+string removeOccurrences(string s, string part) 
+    {
+        if(s.length() < part.length())
+            return s;
+
+        int len = part.length();
+        int found = s.find(part);    
+        
+        while(found != string::npos)
+        {
+            s.erase(found, len);
+            found = s.find(part);
+        }
+        return s;
+    }
+
+
+//Using RECURSION
+string removeOccurrences(string s, string part) 
+    {
+        if(s.length() < part.length())
+            return s;
+
+        int index = s.find(part);
+        if(index != string::npos)
+        {
+            s.erase(index, part.length());
+            return removeOccurrences(s, part);
+        }   
+        else
+            return s;
+    }
