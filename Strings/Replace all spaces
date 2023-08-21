@@ -1,0 +1,10 @@
+//Optimised in terms of space {TC - O(N), SC - O(1)}
+string replaceSpaces(string &str)
+{
+	for(int i = 0; i < str.length(); i ++)
+	{
+		if(str[i] == ' ')
+			str.replace(i, 1, "@40");
+	}
+	return str;
+}
