@@ -1,0 +1,27 @@
+//Using LOOP
+void reverseString(vector<char>& s) 
+    {
+        for(int i = 0, j = s.size() - 1; i < j; i++, j--)
+        {
+            char temp = s[i];
+            s[i] = s[j];
+            s[j] = temp;
+        }    
+    }
+
+//Using RECURSION
+void solve(vector<char> &s, int i, int j)
+    {
+        if(i >= j)
+            return;
+
+        char temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
+        return solve(s, i + 1, j - 1);
+    }
+
+    void reverseString(vector<char>& s) 
+    {
+        solve(s, 0, s.size() - 1);  
+    }
