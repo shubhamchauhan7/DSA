@@ -1,0 +1,48 @@
+//Using PREDEFINED FUNCTION
+int strStr(string haystack, string needle) 
+    {
+        int found = haystack.find(needle);
+        if(found != string::npos)
+            return found;
+        return -1;  
+    }
+
+
+//Using SLIDING WINDOW APPROACH
+int strStr(string haystack, string needle) 
+    {
+        for(int i = 0; i < haystack.length(); i++)
+        {
+            int temp = i;
+            int j = 0;
+            while(j < needle.length())
+            {
+                if(haystack[temp] != needle[j])
+                    break;
+                j++;
+                temp++;
+            }
+            if(j == needle.length())
+                return i;
+        }
+        return -1;
+    }
+
+
+//Using MORE EFFICIENT
+int strStr(string haystack, string needle) 
+    {
+        for(int i = 0; i < haystack.length(); i++)
+        {
+            int j = 0;
+            while(j < needle.length())
+            {
+                if(haystack[i + j] != needle[j])
+                    break;
+                j++;
+            }
+            if(j == needle.length())
+                return i;
+        }
+        return -1;
+    }
