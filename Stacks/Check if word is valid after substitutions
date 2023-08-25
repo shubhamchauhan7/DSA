@@ -1,0 +1,50 @@
+//Using STACK (TC - O(N))
+bool isValid(string s) 
+    {
+        if(s[0] != 'a')
+            return false;
+
+        stack<char> st;
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s[i] == 'a')
+                st.push(s[i]);
+            else if(s[i] == 'b')
+            {
+                if(!st.empty() && st.top() == 'a')
+                    st.push(s[i]);
+                else
+                    return false;
+            }
+            else
+            {
+                if(!st.empty() && st.top() == 'b')
+                {
+                    st.pop();
+                    if(!st.empty() && st.top() == 'a')
+                        st.pop();
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+        }
+        return st.empty();
+    }
+
+
+//Using RECURSION (TC - O(N2))
+bool isValid(string s) 
+    {
+        if(s.length() == 0)
+            return true;
+        int found = s.find("abc");
+        if(found != string::npos)
+        {
+            string sLeft = s.substr(0, found);
+            string sRight = s.substr(found + 3, s.length());
+            return isValid(sLeft + sRight);
+        }    
+        return false;
+    }
