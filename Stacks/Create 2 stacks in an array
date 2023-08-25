@@ -44,7 +44,7 @@ class Stack
 
   void pop2()
   {
-    if(top2 == -1)
+    if(top2 == size)
       cout << "stack is empty";
     else
       top2--;
