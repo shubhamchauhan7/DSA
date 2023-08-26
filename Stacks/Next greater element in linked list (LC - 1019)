@@ -1,0 +1,61 @@
+void solve(vector<int> &arr, vector<int> &ans)
+    {
+        stack<int> st;
+        st.push(-1);
+        for(int i = arr.size() - 1; i >= 0; i--)
+        {
+            if(st.top() != -1)
+            {
+                while(st.top() <= arr[i] && st.top() != -1)
+                    st.pop();
+                if(st.top() == -1)
+                {
+                    ans[i] = 0;
+                    st.push(arr[i]);
+                }    
+                else
+                {
+                    ans[i] = st.top();
+                    st.push(arr[i]);
+                }
+            }
+            else
+            {
+                ans[i] = 0;
+                st.push(arr[i]);
+            }
+        }
+    }
+
+    int findLength(ListNode* head)
+    {
+        ListNode* temp = head;
+        int count = 0;
+        while(temp != NULL)
+        {
+            count++;
+            temp = temp->next;
+        }
+        return count;
+    }
+
+    vector<int> nextLargerNodes(ListNode* head) 
+    {
+        int len = findLength(head);
+
+        vector<int> arr(len);
+        ListNode* temp = head;
+        int index = 0;
+        
+        while(temp != NULL)
+        {
+            arr[index++] = temp->val;
+            temp = temp->next;
+        }
+
+        vector<int> ans(len);
+        
+        solve(arr, ans);
+        
+        return ans;
+    }
