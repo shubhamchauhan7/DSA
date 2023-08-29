@@ -1,3 +1,29 @@
+//More short code
+ListNode* mergeNodes(ListNode* head) 
+    {
+        if(head == NULL)
+            return head;
+
+        ListNode* prev = head;
+        ListNode* curr = prev->next;
+
+        while(curr->next != NULL)
+        {
+            if(curr->val != 0)
+                prev->val = prev->val + curr->val;
+            else
+            {
+                prev->next = curr;
+                prev = curr;
+            }
+            curr = curr->next;
+        } 
+
+        prev->next = NULL;
+        return head; 
+    }
+
+
 // NOT DELETING THE EXTRA NODES
 ListNode* mergeNodes(ListNode* head) 
     {
