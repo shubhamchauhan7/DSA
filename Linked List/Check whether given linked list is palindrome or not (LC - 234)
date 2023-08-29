@@ -1,3 +1,51 @@
+//More Fast on leetcode
+ListNode* reverse(ListNode* prev, ListNode* curr)
+    {
+        ListNode* forward = curr;
+        while(curr != NULL)
+        {
+            forward = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forward;
+        }
+        return prev;
+    }
+    
+    ListNode* solve(ListNode* head)
+    {
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        while(fast != NULL && fast->next != NULL)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        ListNode* newHead = reverse(NULL, slow->next);
+        slow->next = newHead;
+        return newHead;
+    }
+
+    bool isPalindrome(ListNode* head) 
+    {
+        if(head == NULL)
+            return false;
+        
+        ListNode* curr = solve(head);
+        ListNode* temp = head;
+    
+        while(curr != NULL)
+        {
+            if(curr->val != temp->val)
+                return false;
+            curr = curr->next;
+            temp = temp->next;
+        }
+        return true;
+    }
+
+//Little bit slow
 bool isPalindrome(ListNode* head) 
     {
         if(head == NULL)
