@@ -1,5 +1,4 @@
 //Using ITERATIVE METHOD
-
 ListNode* reverseList(ListNode* head) 
     {
         if(head == NULL)
@@ -17,8 +16,8 @@ ListNode* reverseList(ListNode* head)
         return prev;
     }
 
-//Using RECURSION
 
+//Using RECURSION
 ListNode* reverseList(ListNode* head) 
     {
         return reverse(NULL, head);    
