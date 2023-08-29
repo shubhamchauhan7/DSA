@@ -1,0 +1,15 @@
+ListNode *moveToFront(ListNode *head)
+    {
+        if(head == NULL || head->next == NULL)
+            return head;
+        
+        ListNode* curr = head;
+        
+        while(curr->next->next != NULL)
+            curr = curr->next;
+            
+        ListNode* temp = curr->next;
+        curr->next = NULL;
+        temp->next = head;
+        return temp;
+    }
