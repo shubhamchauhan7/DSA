@@ -1,0 +1,36 @@
+int floorSqrt(int x) 
+    {
+        int start = 1;
+        int end = x;
+        int ans = -1;
+        
+        while(start <= end)
+        {
+            int mid = (start + end) / 2;
+            if(mid * mid > x)
+                end = mid - 1;
+            else if(mid * mid < x)
+            {
+                ans = mid;
+                start = mid + 1;
+            }
+            else
+                return mid;
+        }
+
+        double finalAns = ans;
+        int precision;
+        cin << precision;
+        double step = 0.1;
+
+        for(int i = 0; i < precision; i++)
+        {
+            for(double j = finalAns; j * j <= n; j = j + step)
+                finalAns = j;
+            step = step / 10;
+        }
+
+        cout << finalAns;
+        return 0;
+    }
+
