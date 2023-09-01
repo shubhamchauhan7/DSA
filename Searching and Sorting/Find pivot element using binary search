@@ -3,6 +3,8 @@ int pivotIndex(vector<int> arr)
   int start = 0, end = arr.size() - 1;
   while(start <= end)
   {
+    if(start == end)
+      return start;
     int mid = start + (end - start) / 2;
     if(mid + 1 < arr.size() && arr[mid] > arr[mid + 1])
       retunn arr[mid];
