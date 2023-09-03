@@ -1,0 +1,35 @@
+void solve(queue<int> &q, int k)
+{
+    if(k <= 0 || k > n)
+        return;
+    
+    stack<int> st;
+    int count = 0;
+    while(count != k)
+    {
+        st.push(q.front());
+        q.pop();
+        count++;
+    }
+  
+    while(!st.empty())
+    {
+        q.push(st.top());
+        st.pop();
+    }
+
+    int len = q.size() - k;
+    while(len != 0)
+    {
+        int ele = q.front();
+        q.pop();
+        q.push(ele);
+        len--;
+    }  
+}
+
+queue<int> modifyQueue(queue<int> q, int k) 
+{
+    solve(q, k);
+    return q;
+}
