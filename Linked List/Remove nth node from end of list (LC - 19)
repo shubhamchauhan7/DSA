@@ -1,0 +1,18 @@
+ListNode* solve(ListNode* head, int &n)
+    {
+        if(head == NULL)
+            return NULL;
+
+        head->next = solve(head->next, n);
+        
+        n--;
+        if(n == 0)
+            return head->next;
+        else
+            return head;
+    }
+
+    ListNode* removeNthFromEnd(ListNode* head, int n) 
+    {
+        return solve(head, n);
+    }
