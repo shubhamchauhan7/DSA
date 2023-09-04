@@ -9,7 +9,7 @@ Node* solve(Node* head, int &n)
         if(n == 0)
             return head;
         else
-			return ans;
+	    return ans;
     }
 
 Node* nthNodeFromEnd(Node* head, int n)
