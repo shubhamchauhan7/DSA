@@ -1,4 +1,4 @@
-//More short code
+//SHORT CODE 1
 ListNode* mergeNodes(ListNode* head) 
     {
         if(head == NULL)
@@ -24,40 +24,29 @@ ListNode* mergeNodes(ListNode* head)
     }
 
 
-// NOT DELETING THE EXTRA NODES
+//SHORT CODE 2
 ListNode* mergeNodes(ListNode* head) 
     {
-        ListNode* curr = head;
-        ListNode* forward = head->next;
+        if(head == NULL)
+            return head;
 
-        while(forward != NULL)
-        {
-            curr = forward;
-            forward = forward->next;
-            while(forward->val != 0)
-            {
-                curr->val = curr->val + forward->val;
-                forward = forward->next;
-            }
-            curr->next = forward;
-            forward = forward->next;
-        }    
+        ListNode* curr = head->next;
+        ListNode* prev = head;
 
-        ListNode* slow = head->next;
-        ListNode* fast = slow->next;
-        while(fast != NULL)
+        while(curr->next != NULL)
         {
-            if(fast->val == 0)
-                fast = fast->next;
+            if(curr->val != 0)
+                prev->val = prev->val + curr->val;
             else
             {
-                slow->next = fast;
-                slow = fast;
-                fast = fast->next;
+                prev = prev->next;
+                prev->val = 0;
             }
-        }
-        slow->next = fast;
-        return head->next;
+            curr = curr->next;
+        }    
+
+        prev->next = NULL;
+        return head;
     }
 
 // DELETING THE EXTRA NODES
