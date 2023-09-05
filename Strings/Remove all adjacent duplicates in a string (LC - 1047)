@@ -1,3 +1,4 @@
+//USING EXTRA SPACE BUT TIME EFFICIENT
 string removeDuplicates(string s) 
     {
         string ans = "";
@@ -9,4 +10,32 @@ string removeDuplicates(string s)
                 ans.push_back(s[i]);
         }
         return ans;
+    }
+
+
+//WITHOUT USING EXTRA SPACE BUT TIME INEFFICIENT
+string removeDuplicates(string s) 
+    {
+        int prev = 0;
+        int curr = prev + 1;
+
+        while(curr < s.length())
+        {
+            if(s[prev] == s[curr])
+            {
+                s.erase(prev, 2);
+                if(prev != 0)
+                {
+                    prev--;
+                    curr--;
+                }
+            }
+            else
+            {
+                prev++;
+                curr++;
+            }
+        }  
+
+        return s;  
     }
