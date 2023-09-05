@@ -1,0 +1,55 @@
+//WITHOUT INBUILT FUNCTIONS
+bool check(char ch)
+    {
+        if((ch >= 'a' && ch <='z') || (ch >= 'A' && ch <= 'Z'))
+            return true;
+        else
+            return false;
+    }
+    string reverseOnlyLetters(string s) 
+    {
+        int start = 0;
+        int end = s.length() - 1;
+        
+        while(start <= end)
+        {
+            if(check(s[start]) && check(s[end]))
+            {
+                char ch = s[start];
+                s[start] = s[end];
+                s[end] = ch;
+                start++;
+                end--;
+            }
+            else
+            {
+                if(check(s[start]))
+                    end--;
+                else
+                    start++;
+            }
+        } 
+        return s;   
+    }
+
+
+//USING INBUILT FUNCTIONS
+string reverseOnlyLetters(string s) 
+    {
+        int i = 0;
+        int j = s.length() - 1;
+        while(i < j)     
+        {
+            if(isalpha(s[i]) && isalpha(s[j]))
+            {
+                swap(s[i], s[j]);
+                i++;
+                j--;
+            }
+            else if(!isalpha(s[i]))
+                i++;
+            else
+                j--;
+        }
+        return s;
+    }
