@@ -47,7 +47,7 @@ class Stack
     if(top2 == size)
       cout << "stack is empty";
     else
-      top2--;
+      top2++;
   }
 
 };
