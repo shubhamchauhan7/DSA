@@ -1,3 +1,4 @@
+//Printing ans
 void solve(string &s, int i)
 {
   if(i >= s.length())
@@ -20,5 +21,37 @@ int main()
   int i = 0;
 	string s = "abc";
 	solve(s, i);
-	
 }
+
+//Storing ans
+void solve(string &S, vector<string> &arr, unordered_set<string> &seen, int i)
+	    {
+	        if(i == S.length())
+	        {
+	            if(seen.find(S) != seen.end())
+	                return;
+	            else
+	            {
+	                arr.push_back(S);
+	                seen.insert(S);
+	            }
+	        }
+	            
+	        
+	        for(int j = i; j < S.length(); j++)
+	        {
+	            swap(S[i], S[j]);
+	            solve(S, arr, seen, i + 1);
+	            swap(S[i], S[j]);
+	        }
+	        
+	        return;
+	    }
+	    
+		vector<string>find_permutation(string S)
+		{
+		    vector<string> arr;
+		    unordered_set<string> seen;
+		    solve(S, arr, seen, 0);
+		    return arr;
+		}
