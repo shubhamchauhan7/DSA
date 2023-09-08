@@ -1,4 +1,19 @@
-//FASTER APPROACH 
+//APPROACH 1 - FASTER AND EFFICIENT
+void solve(int open, int close, string ans, vector<string> &output)
+    {
+        if(open > close)
+            return;
+        if(open == 0 && close == 0)
+            return output.push_back(ans);
+
+        if(open != 0)
+            solve(open - 1, close, ans + '(', output);
+        solve(open, close - 1, ans + ')', output);
+        return;
+    }
+
+
+//APPROACH 2
 void solve(vector<string> &ans, int open, int close, string output)
     {
         if(open == 0 && close == 0)
@@ -16,30 +31,6 @@ void solve(vector<string> &ans, int open, int close, string output)
             solve(ans, open, close - 1, output);
             output.pop_back();
         }
-        return;
-    }
-
-    vector<string> generateParenthesis(int n) 
-    {
-        vector<string> ans;
-        string output = "";
-        int open = n;
-        int close = n;
-        solve(ans, open, close, output);
-        return ans;    
-    }
-
-//SLIGHTLY SLOWER APPROACH
-void solve(int open, int close, vector<string> &ans, string output)
-    {
-        if(open == 0 && close == 0)
-            return ans.push_back(output);
-        if(open > close || open < 0 || close < 0)
-            return;
-
-        solve(open - 1, close, ans, output + '(');
-        solve(open, close - 1, ans, output + ')');
-        
         return;
     }
 
