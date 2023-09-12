@@ -1,3 +1,40 @@
+//APPROACH 1
+Node *getListAfterDeleteOperation(Node *head, int n, int m)
+{
+	if(head == NULL || n == 0)
+		return head;
+	
+	Node* curr = head;
+	Node* prev = NULL;
+	int travel = m;
+	int remove = n;
+	
+	while(curr != NULL)
+	{
+		if(travel != 0)
+		{
+			travel--;
+			prev = curr;
+			curr = curr->next;
+		}
+		else
+		{
+			while(curr != NULL && remove != 0)
+			{
+				curr = curr->next;
+				remove--;
+				prev->next = curr;
+			}
+			travel = m;
+			remove = n;
+		}
+	}
+
+	return head;
+}
+
+
+//APPROACH 2
 void linkdelete(struct Node  *head, int M, int N)
     {
         if(head == NULL)
