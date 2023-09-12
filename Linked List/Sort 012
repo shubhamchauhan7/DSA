@@ -1,0 +1,43 @@
+Node* sortList(Node *head)
+{
+    if(head == NULL)
+        return head;
+    
+    Node* zeroHead = new Node(-1);
+    Node* zeroTail = zeroHead;
+    Node* oneHead = new Node(-1);
+    Node* oneTail = oneHead;
+    Node* twoHead = new Node(-1);
+    Node* twoTail = twoHead;
+
+    Node* temp = head;
+    while(head != NULL)
+    {
+        if(head->data == 0)
+        {
+            head = head->next;
+            temp->next = NULL;
+            zeroTail->next = temp;
+            zeroTail = temp;
+        }
+        else if(head->data == 1)
+        {
+            head = head->next;
+            temp->next = NULL;
+            oneTail->next = temp;
+            oneTail = temp;
+        }
+        else
+        {
+            head = head->next;
+            temp->next = NULL;
+            twoTail->next = temp;
+            twoTail = temp;
+        }
+        temp = head;
+    }
+
+    zeroTail->next = oneHead->next;
+    oneTail->next = twoHead->next;
+    return zeroHead->next;
+}
