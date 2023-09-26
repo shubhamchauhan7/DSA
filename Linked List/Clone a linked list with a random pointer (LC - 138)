@@ -1,49 +1,117 @@
-void insertAtTail(Node* &head, Node* &tail, int val)
+//APPROACH 1
+//TC - O(N), SC - O(N)
+
+Node* copyRandomList(Node* head) 
     {
-        Node* newNode = new Node(val);
-        
         if(head == NULL)
-        {
-            head = newNode;
-            tail = newNode;
-        }
-        else
-        {
-            tail->next = newNode;
-            tail = newNode;
-        }
-        return;
-    }
+            return head;
 
-    Node* copyRandomList(Node* head) 
-    {
         Node* cloneHead = NULL;
-        Node* cloneTail = NULL;
-        Node* temp = head;
+        Node* cloneTail = cloneHead;
+        Node* curr = head;
 
-        while(temp != NULL)
+        while(curr != NULL)
         {
-            insertAtTail(cloneHead, cloneTail, temp->val);
-            temp = temp->next;
-        }
+            Node* newNode = new Node(curr->val);
+            if(cloneHead == NULL)
+            {
+                cloneHead = newNode;
+                cloneTail = cloneHead;
+            }
+            else
+            {
+                cloneTail->next = newNode;
+                cloneTail = newNode;
+            }
+            curr = curr->next;
+        } 
 
-        unordered_map<Node*, Node*> oldToNewNode;
+        unordered_map<Node*, Node*> mapped;
         Node* originalNode = head;
         Node* cloneNode = cloneHead;
-        while(originalNode != NULL && cloneNode != NULL)
+
+        while(originalNode != NULL)
         {
-            oldToNewNode[originalNode] = cloneNode;
+            mapped[originalNode] = cloneNode;
             originalNode = originalNode->next;
             cloneNode = cloneNode->next;
-        }       
+        }
 
         originalNode = head;
         cloneNode = cloneHead;
 
         while(originalNode != NULL)
         {
-            cloneNode->random = oldToNewNode[originalNode->random];
+            cloneNode->random = mapped[originalNode->random];
             originalNode = originalNode->next;
+            cloneNode = cloneNode->next;
+        }
+
+        return cloneHead;
+    }
+
+
+//APPROACH 2
+//TC - O(N), SC - O(1)
+
+Node* copyRandomList(Node* head)
+    {
+        if(head == NULL)
+            return head;
+
+        Node* cloneHead = NULL;
+        Node* cloneTail = cloneHead;
+        Node* curr = head;
+
+        while(curr != NULL)
+        {
+            Node* newNode = new Node(curr->val);
+            if(cloneHead == NULL)
+            {
+                cloneHead = newNode;
+                cloneTail = cloneHead;
+            }
+            else
+            {
+                cloneTail->next = newNode;
+                cloneTail = newNode;
+            }
+            curr = curr->next;
+        }
+
+        Node* originalNode = head;
+        Node* cloneNode = cloneHead;
+
+        while(originalNode != NULL)
+        {
+            Node* forward = originalNode->next;
+            originalNode->next = cloneNode;
+            originalNode = forward;
+
+            forward = cloneNode->next;
+            cloneNode->next = originalNode;
+            cloneNode = forward;
+        }    
+
+        curr = head;
+        
+        while(curr != NULL)
+        {
+            if(curr->next != NULL)
+                curr->next->random = curr->random ? curr->random->next : curr->random; 
+            curr = curr->next->next;
+        }
+
+        originalNode = head;
+        cloneNode = cloneHead;
+
+        while(originalNode != NULL)
+        {
+            originalNode->next = cloneNode->next;
+            originalNode = originalNode->next;
+
+            if(originalNode != NULL)
+                cloneNode->next = originalNode->next;
             cloneNode = cloneNode->next;
         }
 
