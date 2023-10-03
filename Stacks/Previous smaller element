@@ -1,0 +1,17 @@
+vector<int> leftSmaller(int n, int a[])
+    {
+        stack<int> st;
+        st.push(-1);
+        
+        vector<int> ans(n);
+        
+        for(int i = 0; i < n; i++)
+        {
+            while(st.top() >= a[i])
+                st.pop();
+            ans[i] = st.top();
+            st.push(a[i]);
+        }
+        
+        return ans;
+    }
