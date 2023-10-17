@@ -8,28 +8,26 @@ int strStr(string haystack, string needle)
     }
 
 
-//Using SLIDING WINDOW APPROACH
+//Using SLIDING WINDOW APPROACH - 1
 int strStr(string haystack, string needle) 
     {
-        for(int i = 0; i < haystack.length(); i++)
+        int n = haystack.length();
+        int m = needle.length();
+        for(i = 0; i <= n - m; i++)
         {
-            int temp = i;
-            int j = 0;
-            while(j < needle.length())
+            for(j = 0; j < m; j++)
             {
-                if(haystack[temp] != needle[j])
+                if(haystack[i + j] != needle[j])
                     break;
-                j++;
-                temp++;
             }
-            if(j == needle.length())
+            if(j == m)
                 return i;
         }
-        return -1;
+        return -1;   
     }
 
 
-//Using MORE EFFICIENT
+//Using SLIDING WINDOW APPROACH - 2
 int strStr(string haystack, string needle) 
     {
         for(int i = 0; i < haystack.length(); i++)
