@@ -1,0 +1,57 @@
+vector<int> reverse(vector<int> &ans) 
+{
+  for (int i = 0, j = ans.size() - 1; i < j; i++, j--)
+  {
+	  int temp = ans[i];
+	  ans[i] = ans[j];
+	  ans[j] = temp;
+  }
+
+  return ans;
+}
+
+vector<int> findArraySum(vector<int>&a, int n, vector<int>&b, int m) 
+{
+	vector<int> ans;
+	int i = n - 1;
+	int j = m - 1;
+	int carry = 0;
+	int sum = 0;
+
+	while(i >= 0 && j >= 0)
+	{
+		sum = a[i] + b[j] + carry;
+		carry = sum / 10;
+		int digit = sum % 10;
+		ans.push_back(digit);
+		i--;
+		j--;
+	}	
+
+	while(i >= 0)
+	{
+		sum = a[i] + carry;
+		carry = sum / 10;
+		int digit = sum % 10;
+		ans.push_back(digit);
+		i--;	
+	}
+
+	while(j >= 0)
+	{
+		sum = b[j] + carry;
+		carry = sum / 10;
+		int digit = sum % 10;
+		ans.push_back(digit);
+		j--;	
+	}
+
+	while(carry != 0)
+	{
+		int digit = carry % 10;
+		carry = carry / 10;
+		ans.push_back(digit);
+	}
+
+	return reverse(ans);
+}
