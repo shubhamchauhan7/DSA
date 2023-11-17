@@ -1,3 +1,5 @@
+//APPROACH 1
+
 int solve(vector<int> &arr, int target)
 {
   if(target == 0)
@@ -13,4 +15,33 @@ int solve(vector<int> &arr, int target)
       mini = min(mini, ans + 1); 
   }
   return mini;
+}
+ 
+//APPROACH 2
+
+void solve(vector<int> &num, int count, int &ans, int x)
+{
+    if(x < 0)
+        return;
+
+    if(x == 0)
+    {
+        ans = min(ans, count);
+        return;
+    }
+
+    for(int i = 0; i < num.size(); i++)
+        solve(num, count + 1, ans, x - num[i]);
+    
+    return;
+}
+
+int minimumElements(vector<int> &num, int x)
+{
+    int count = 0;
+    int ans = INT_MAX;
+    solve(num, count, ans, x);
+    if(ans == INT_MAX)
+        ans = -1;
+    return ans;
 }
