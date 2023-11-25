@@ -1,8 +1,4 @@
-void solve(vector<int> &arr, vector<int> &ans)
-    {
-        stack<int> st;
-        st.push(-1);
-        void solve(vector<int> &ll, vector<int> &ans)
+void solve(vector<int> &ll, vector<int> &ans)
         {
             stack<int> st;
             st.push(0);
@@ -15,7 +11,6 @@ void solve(vector<int> &arr, vector<int> &ans)
                 st.push(ll[i]);
             }
         }
-    }
 
     int findLength(ListNode* head)
     {
