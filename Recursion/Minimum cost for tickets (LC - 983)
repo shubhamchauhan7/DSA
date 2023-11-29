@@ -1,7 +1,27 @@
-//Using DP
+//APPROACH 1
+int solve(vector<int>& days, vector<int>& costs, int index)
+    {
+        if(index >= days.size())
+            return 0;
+        
+        int opt1 = costs[0] + solve(days, costs, index + 1);
 
+        int i;
+        for(i = index;  i < days.size() && days[i] < days[index] + 7; i++);
+        int opt2 = costs[1] + solve(days, costs, i);
 
-//Using RECURSION
+        for(i = index;  i < days.size() && days[i] < days[index] + 30; i++);
+        int opt3 = costs[2] + solve(days, costs, i);
+
+        return min(opt1, min(opt2, opt3));
+    }
+
+    int mincostTickets(vector<int>& days, vector<int>& costs) 
+    {
+        return solve(days, costs, 0);    
+    }
+
+//APPROACH 2
 int solve(vector<int>& days, vector<int>& costs, int i)
     {
         if(i >= days.size())
