@@ -1,0 +1,30 @@
+int height(TreeNode* root)
+    {
+        if(root == NULL)
+            return 0;
+        
+        int left = height(root->left);
+        int right = height(root->right);
+        
+        return max(left, right) + 1;
+    }
+
+    bool isBalanced(TreeNode* root) 
+    {
+        if(root == NULL)
+            return true;
+
+        int leftHeight = height(root->left);
+        int rightHeight = height(root->right);
+        int diff = abs(leftHeight - rightHeight);
+        
+        bool ans = (diff<=1);
+
+        bool left = isBalanced(root->left);
+        bool right = isBalanced(root->right);
+
+        if(ans && left && right)
+            return true;
+        else
+            return false;
+    }
