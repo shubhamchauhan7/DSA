@@ -1,0 +1,36 @@
+//APPROACH 1
+int solve(Node* root)
+    {
+        if(root == NULL)
+            return 0;
+            
+        int leftSum = solve(root->left);
+        int rightSum = solve(root->right);
+        
+        int data = root->data;
+        root->data = leftSum + rightSum;
+        
+        return data + leftSum + rightSum;
+        
+    }
+    
+    void toSumTree(Node *root)
+    {
+        solve(root);
+        return;
+    }
+
+//APPROACH 2
+
+int solve(Node *root)
+    {
+      if(root == NULL)
+            return 0;
+            
+        int leftSum = solve(root->left);
+        int rightSum = solve(root->right);
+        
+        root->data = leftSum + root->data + rightSum;
+        
+        return root->data;    
+    }
