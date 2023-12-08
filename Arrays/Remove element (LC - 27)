@@ -1,0 +1,55 @@
+//APPROACH 1
+int removeElement(vector<int>& nums, int val) 
+    {
+        int index = 0;
+        for(int i = 0; i < nums.size(); i++)
+        {
+            if(nums[i] != val)
+            {
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+
+        return index;
+    }
+
+//APPROACH 2
+
+int removeElement(vector<int>& nums, int val) 
+    {
+        int i = 0, j = 0;
+        while(i < nums.size())
+        {
+            if(nums[i] != val)
+            {
+                nums[j] = nums[i];
+                i++;
+                j++;
+            }
+            else
+            {
+                nums[i] = -1;
+                i++;
+            }
+        }
+
+        while(j < nums.size())
+        {
+            nums[j] = -1;
+            j++;
+        }
+
+        i = 0;
+        int count = 0;
+
+        while(i < nums.size())
+        {
+            if(nums[i] != -1)
+                count++;
+            i++;
+        }
+
+        return count;
+
+    }
