@@ -1,0 +1,27 @@
+string convert(string s, int numRows) 
+    {
+        vector<string> ans(numRows);
+        
+        if(numRows == 1)
+            return s;
+        
+        bool flag = false;
+        int index = 0;
+
+        for(auto ch : s)
+        {
+            ans[index] += ch;
+            if(index == 0 || index == numRows - 1)
+                flag = !flag;
+            if(flag)
+                index++;
+            else
+                index--;
+        }
+
+        string zigzag = "";
+        for(auto str : ans)
+            zigzag += str;
+
+        return  zigzag;
+    }
