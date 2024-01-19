@@ -1,0 +1,48 @@
+string decodeString(string s) 
+    {
+        stack<string> st;
+
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s[i] == ']')
+            {
+                string stringToRepeat = "";
+                while(!st.empty() && st.top() != "[")
+                {
+                    stringToRepeat = st.top() + stringToRepeat;
+                    st.pop();
+                }
+                st.pop();
+
+                string numeric = "";
+                while(!st.empty() && isdigit(st.top()[0]))
+                {
+                    numeric = st.top() + numeric;
+                    st.pop();
+                }
+                int num = stoi(numeric);
+
+                string current = "";
+                while(num != 0)
+                {
+                    current = stringToRepeat + current;
+                    num--;
+                }
+                st.push(current);
+            }
+            else
+            {
+                string temp(1, s[i]);
+                st.push(temp);
+            }
+        }    
+
+        string ans = "";
+        while(!st.empty())
+        {
+            ans = st.top() + ans;
+            st.pop();
+        }    
+
+        return ans;
+    }
