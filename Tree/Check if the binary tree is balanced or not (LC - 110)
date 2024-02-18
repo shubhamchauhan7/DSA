@@ -1,3 +1,39 @@
+//APPROACH 2 - O(N)
+
+pair<bool, int> solve(TreeNode* root)
+    {
+        if(root == NULL)
+        {
+            pair<bool, int> p = make_pair(true, 0);
+            return p;
+        }   
+
+        pair<bool, int> left = solve(root->left);
+        pair<bool, int> right = solve(root->right);
+
+        bool leftAns = left.first;
+        bool rightAns = right.first;
+
+        bool diff = abs(left.second - right.second) <= 1;    
+        pair<bool, int> ans;
+        ans.second = max(left.second, right.second) + 1;
+
+        if(leftAns && rightAns && diff)
+            ans.first = true;
+        else
+            ans.first = false;
+
+        return ans;
+    }
+
+    bool isBalanced(TreeNode* root) 
+    {
+        return solve(root).first;    
+    }
+
+
+//APPROACH 2 - O(N2)
+
 int height(TreeNode* root)
     {
         if(root == NULL)
@@ -14,17 +50,11 @@ int height(TreeNode* root)
         if(root == NULL)
             return true;
 
-        int leftHeight = height(root->left);
-        int rightHeight = height(root->right);
-        int diff = abs(leftHeight - rightHeight);
-        
-        bool ans = (diff<=1);
-
         bool left = isBalanced(root->left);
         bool right = isBalanced(root->right);
-
-        if(ans && left && right)
+        bool diff = abs(height(root->left) - height(root->right)) <= 1;    
+    
+        if(left && right && diff)
             return true;
-        else
-            return false;
+        return false;
     }
