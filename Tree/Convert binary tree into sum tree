@@ -1,26 +1,45 @@
-//APPROACH 1
-int solve(Node* root)
+//Check if sum tree or not
+
+pair<bool, int> solve(Node* root)
     {
         if(root == NULL)
-            return 0;
+        {
+            pair<bool, int> p = make_pair(true, 0);
+            return p;
+        }
+        if(root->left == NULL && root->right == NULL)
+        {
+            pair<bool, int> p = make_pair(true, root->data);
+            return p;
+        }
+        
+        pair<bool, int>leftAns = solve(root->left);
+        pair<bool, int>rightAns = solve(root->right);
+        
+        bool left = leftAns.first;
+        bool right = rightAns.first;
+        
+        bool condn = root->data == leftAns.second + rightAns.second;
+        
+        pair<bool, int> ans;
+        if(left && right && condn)
+        {
+            ans.first = true;
+            ans.second = 2 * root->data;
+        }
+        else
+            ans.first = false;
             
-        int leftSum = solve(root->left);
-        int rightSum = solve(root->right);
-        
-        int data = root->data;
-        root->data = leftSum + rightSum;
-        
-        return data + leftSum + rightSum;
-        
+        return ans;
     }
     
-    void toSumTree(Node *root)
+    bool isSumTree(Node* root)
     {
-        solve(root);
-        return;
+        return solve(root).first;
     }
 
-//APPROACH 2
+
+//Convert into sum tree
 
 int solve(Node *root)
     {
