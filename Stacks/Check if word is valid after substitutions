@@ -5,6 +5,7 @@ bool isValid(string s)
             return false;
 
         stack<char> st;
+
         for(int i = 0; i < s.length(); i++)
         {
             if(s[i] == 'a')
@@ -18,19 +19,13 @@ bool isValid(string s)
             }
             else
             {
-                if(!st.empty() && st.top() == 'b')
-                {
-                    st.pop();
-                    if(!st.empty() && st.top() == 'a')
-                        st.pop();
-                    else
-                        return false;
-                }
-                else
+                if(st.size() < 2 || st.top() != 'b')
                     return false;
+                st.pop();
+                st.pop();
             }
         }
-        return st.empty();
+        return st.empty();    
     }
 
 
